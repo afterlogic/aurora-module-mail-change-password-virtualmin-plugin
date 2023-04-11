@@ -1,0 +1,44 @@
+{
+	"Disabled": [
+		false,
+		"bool"
+	],
+	"Disabled_Description": [
+		"Setting to true disables the module",
+		"string"
+	],	
+	"SupportedServers": [
+		[
+			"*"
+		],
+		"array"
+	],
+	"SupportedServers_Description": [
+		"If IMAP Server value of the mailserver is in this list, password change is enabled for it. * enables it for all the servers.",
+		"string"
+	],
+	"VirtualminURL": [
+		"https://192.168.0.1:10000",
+		"string"
+	],
+	"VirtualminURL_Description": [
+		"Defines main URL of Virtualmin installation",
+		"string"
+	],
+	"VirtualminAdminUser": [
+		"root",
+		"string"
+	],
+	"VirtualminAdminUser_Description": [
+		"Admin username of Virtualmin installation",
+		"string"
+	],
+	"VirtualminAdminPass": [
+		"",
+		"string"
+	],
+	"VirtualminAdminPass_Description": [
+		"Admin password of Virtualmin installation",
+		"string"
+	]		
+}
