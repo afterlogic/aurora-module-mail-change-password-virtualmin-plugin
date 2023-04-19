@@ -15,6 +15,8 @@ namespace Aurora\Modules\MailChangePasswordVirtualminPlugin;
  * @license https://afterlogic.com/products/common-licensing Afterlogic Software License
  * @copyright Copyright (c) 2023, Afterlogic Corp.
  *
+ * @property Settings $oModuleSettings
+ *
  * @package Modules
  */
 class Module extends \Aurora\System\Module\AbstractModule
@@ -90,12 +92,12 @@ class Module extends \Aurora\System\Module\AbstractModule
      */
     protected function checkCanChangePassword($oAccount)
     {
-        $bFound = in_array('*', $this->getConfig('SupportedServers', array()));
+        $bFound = in_array('*', $this->oModuleSettings->SupportedServers);
 
         if (!$bFound) {
             $oServer = $oAccount->getServer();
 
-            if ($oServer && in_array($oServer->IncomingServer, $this->getConfig('SupportedServers'))) {
+            if ($oServer && in_array($oServer->IncomingServer, $this->oModuleSettings->SupportedServers)) {
                 $bFound = true;
             }
         }
@@ -116,9 +118,9 @@ class Module extends \Aurora\System\Module\AbstractModule
         $sPassCurr = $oAccount->getPassword();
         [$sUsername, $sDomain] = explode("@", $sEmail);
 
-        $sVirtualminURL = rtrim($this->getConfig('VirtualminURL', ''), "/");
-        $sVirtualminAdminUser = $this->getConfig('VirtualminAdminUser', '');
-        $sVirtualminAdminPass = $this->getConfig('VirtualminAdminPass', '');
+        $sVirtualminURL = rtrim($this->oModuleSettings->VirtualminURL, "/");
+        $sVirtualminAdminUser = $this->oModuleSettings->VirtualminAdminUser;
+        $sVirtualminAdminPass = $this->oModuleSettings->VirtualminAdminPass;
 
         if (0 === strlen($sPassword) || $sPassCurr === $sPassword) {
             throw new \Aurora\System\Exceptions\ApiException(\Aurora\System\Exceptions\Errs::UserManager_AccountNewPasswordRejected);
