@@ -128,6 +128,13 @@ class Module extends \Aurora\System\Module\AbstractModule
         $sVirtualminAdminUser = $this->oModuleSettings->VirtualminAdminUser;
         $sVirtualminAdminPass = $this->oModuleSettings->VirtualminAdminPass;
 
+        if ($sVirtualminAdminPass && !\Aurora\System\Utils::IsEncryptedValue($sVirtualminAdminPass)) {
+            $this->setConfig('VirtualminAdminPass', \Aurora\System\Utils::EncryptValue($sVirtualminAdminPass));
+            $this->saveModuleConfig();
+        } else {
+            $sVirtualminAdminPass = \Aurora\System\Utils::DecryptValue($sVirtualminAdminPass);
+        }
+
         if (0 === strlen($sPassword) || $sPassCurr === $sPassword) {
             throw new \Aurora\System\Exceptions\ApiException(\Aurora\System\Exceptions\Errs::UserManager_AccountNewPasswordRejected);
         }
