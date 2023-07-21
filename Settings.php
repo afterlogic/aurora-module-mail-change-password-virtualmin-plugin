@@ -27,7 +27,7 @@ class Settings extends \Aurora\System\Module\Settings
                 "bool",
                 null,
                 "Setting to true disables the module",
-            ),	
+            ),
             "SupportedServers" => new SettingsProperty(
                 [
                     "*"
