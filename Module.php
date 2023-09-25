@@ -139,7 +139,7 @@ class Module extends \Aurora\System\Module\AbstractModule
             throw new \Aurora\System\Exceptions\ApiException(\Aurora\System\Exceptions\Errs::UserManager_AccountNewPasswordRejected);
         }
 
-        $sURL = $sVirtualminURL . '/virtual-server/remote.cgi?program=modify-user&domain=' . urlencode($sDomain) . '&user=' . urlencode($sUsername) . '&pass=' . urlencode($sPassword) .'&json=1';
+        $sURL = $sVirtualminURL . '/virtual-server/remote.cgi?program=modify-user&domain=' . urlencode($sDomain) . '&user=' . urlencode($sUsername) . '&pass=' . urlencode($sPassword) . '&json=1';
         $sURL = str_replace('//', '/', $sURL);
 
         $ch = curl_init();
@@ -147,10 +147,10 @@ class Module extends \Aurora\System\Module\AbstractModule
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-        curl_setopt($ch, CURLOPT_USERPWD, $sVirtualminAdminUser.":".$sVirtualminAdminPass);
+        curl_setopt($ch, CURLOPT_USERPWD, $sVirtualminAdminUser . ":" . $sVirtualminAdminPass);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        $mResult=json_decode(curl_exec($ch), true);
+        $mResult = json_decode(curl_exec($ch), true);
         curl_close($ch);
 
         if ($mResult === null) {
@@ -158,8 +158,8 @@ class Module extends \Aurora\System\Module\AbstractModule
         }
 
         if (isset($mResult["status"]) && ($mResult["status"] != "success")) {
-            $sOutput = (isset($mResult["output"])) ? (": ".trim($mResult["output"])) : "";
-            throw new \Aurora\System\Exceptions\ApiException(0, null, "Virtualmin API error".$sOutput);
+            $sOutput = (isset($mResult["output"])) ? (": " . trim($mResult["output"])) : "";
+            throw new \Aurora\System\Exceptions\ApiException(0, null, "Virtualmin API error" . $sOutput);
         }
 
         return true;
