@@ -9,6 +9,7 @@
 namespace Aurora\Modules\MailChangePasswordVirtualminPlugin;
 
 use Aurora\Modules\Mail\Models\MailAccount;
+use Aurora\System\Notifications;
 
 /**
  * Allows users to change passwords on their email accounts in Virtualmin.
@@ -138,7 +139,7 @@ class Module extends \Aurora\System\Module\AbstractModule
         }
 
         if (0 === strlen($sPassword) || $sPassCurr === $sPassword) {
-            throw new \Aurora\System\Exceptions\ApiException(\Aurora\System\Exceptions\Errs::UserManager_AccountNewPasswordRejected);
+            throw new \Aurora\System\Exceptions\ApiException(Notifications::CanNotChangePassword);
         }
 
         $sURL = $sVirtualminURL . '/virtual-server/remote.cgi?program=modify-user&domain=' . urlencode($sDomain) . '&user=' . urlencode($sUsername) . '&pass=' . urlencode($sPassword) . '&json=1';
