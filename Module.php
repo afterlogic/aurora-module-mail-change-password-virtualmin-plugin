@@ -143,6 +143,7 @@ class Module extends \Aurora\System\Module\AbstractModule
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
         curl_setopt($ch, CURLOPT_USERPWD, $sVirtualminAdminUser . ":" . $sVirtualminAdminPass);
+        // Intentionally disabled: Virtualmin control panels commonly run with self-signed certificates.
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         $mResult = json_decode(curl_exec($ch), true);
