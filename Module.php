@@ -147,7 +147,6 @@ class Module extends \Aurora\System\Module\AbstractModule
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         $mResult = json_decode(curl_exec($ch), true);
-        curl_close($ch);
 
         if ($mResult === null) {
             throw new \Aurora\System\Exceptions\ApiException(0, null, "Virtualmin API failure");
